@@ -26,7 +26,7 @@
 		}
 		return 0;
 	}
-
+ 
 ##1004 统计输入字符串次数最多
 	#include<stdio.h>
 	#include<string.h>
@@ -64,3 +64,45 @@
 	 }
 	return 0;
 	}
+#1005
+###错误解法：使用递归
+	#include<stdio.h>
+	#include<string.h>
+	#include<math.h>
+	int f(long n,int a,int b){
+		if(n == 1 || n == 2)
+			return 1;
+		else
+			return (a*f(n-1,a,b)+b*f(n-2,a,b))%7;
+	}
+	int main(){
+		int a,b,n;
+		while(scanf("%d%d%ld",&a,&b,&n)!=EOF){
+			getchar();
+			if(a == 0 && b==0 &&n == 0)
+				break;
+			printf("%d\n",f(n,a,b));
+		}
+		return 0;
+	}
+###正解，使用递推
+	int main()  
+	{  
+	    int    A,B,i;  
+	    long int n;  
+	    while(scanf("%d%d%ld",&A,&B,&n)!=EOF)  
+	    {  
+	        int a[50];  
+	        a[1]=1;  
+	        a[2]=1;  
+	        if((A+B+n)==0)break;  
+	        for(i=3;i<=48;i++)  
+	        {  
+	            a[i]=(A*a[i-1]+B*a[i-2])%7;  
+	        }  
+	        n=n%48;  
+	        a[0]=a[48];  
+	        printf("%d\n",a[n]);  
+	    }  
+	    return 0;  
+	}  
